@@ -7,7 +7,7 @@
 #include <sstream>
 
 
-std::vector<Clause*> CMax3SatProblem::load(int n, std::string filename) {
+std::vector<Clause*> CMax3SatProblem::load(int amountOfClauzules, std::string filename) {
 
 	// otwieranie pliku
 	std::ifstream file;
@@ -26,7 +26,7 @@ std::vector<Clause*> CMax3SatProblem::load(int n, std::string filename) {
 
 	// odczytujemy dane
 	int i = 0;
-	while (i < n) {
+	while (i < amountOfClauzules) {
 		// splitujemy
 		std::getline(file, line);
 		std::stringstream streamData(line);
@@ -57,27 +57,38 @@ int CMax3SatProblem::compute(std::string solution, int amountOfClauzules, std::v
 	for (int i = 0; i < amountOfClauzules; i++) {
 
 		int nr = clauzles.at(i)->getSt();
-		nr += 50;
 
-		if (solution[nr] == '1') {
+		if (nr >= 0 && solution[nr] == '1') {
 			counter++;
 			continue;
+		}
+		else {
+			if (nr < 0 && solution[std::abs(nr)] == '0') {
+				counter++;
+				continue;
+			}
 		}
 
 		int nr2 = clauzles.at(i)->getNd();
-		nr2 += 50;
 
-		if (solution[nr2] == '1') {
+		if (nr2 >= 0 && solution[nr2] == '1') {
 			counter++;
 			continue;
 		}
+		else {
+			if (nr2 < 0 && solution[std::abs(nr2)] == '0') {
+				counter++;
+				continue;
+			}
+		}
 
 		int nr3 = clauzles.at(i)->getRd();
-		nr3 += 50;
 
-		if (solution[nr3] == '1') {
+		if (nr3 >= 0 && solution[nr3] == '1')
 			counter++;
-			continue;
+		else {
+			if (nr3 < 0 && solution[std::abs(nr3)] == '0')
+				counter++;
 		}
 	}
 

@@ -1,35 +1,55 @@
 ﻿#include <iostream>
 #include <vector>
 #include "CMax3SatProblem.h"
+#include "CGAIndividual.h"
 
 int main()
 {
-    CMax3SatProblem c1;
-    std::vector<Clause*> clauses = c1.load(213, "m3s_50_0.txt");
+    CMax3SatProblem problem = CMax3SatProblem();
 
-    for (int i = 0; i < 213; i++)
-        clauses.at(i)->show();
-
-
-    int result = c1.compute(
-        "0101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101", 
-        213, 
-        clauses
-    );
-
-    int result2 = c1.compute(
-        "0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
-        213,
-        clauses
-    );
-
-    int result3 = c1.compute(
-        "1111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111",
-        213,
-        clauses
-    );
+    std::vector<Clause*> clauzules = problem.load(213, "m3s_50_14.txt");
     
-    std::cout << "solution for 010101... : " << result << std::endl;
-    std::cout << "solution for 000000... : " << result2 << std::endl;
-    std::cout << "solution for 111111... : " << result3 << std::endl;
+    int a = problem.compute(
+        "111111111111111111111111111111111111111111111111111",
+        213,
+        clauzules
+    );
+    std::cout << a << std::endl;
+
+    int b = problem.compute(
+        "000000000000000000000000000000000000000000000000000",
+        213,
+        clauzules
+    );
+    std::cout << b << std::endl;
+
+    
+    
+
+    CGAIndividual* r1 = new CGAIndividual(true);
+    CGAIndividual* r2 = new CGAIndividual(false);
+
+    r1->showGenotype();
+    r2->showGenotype();
+
+    std::cout << r1->getFitness(problem) << std::endl;
+    std::cout << r2->getFitness(problem) << std::endl;
+
+    bool** children = r1->crossover(*r2);
+
+    CGAIndividual* c1 = new CGAIndividual(children[0]);
+    CGAIndividual* c2 = new CGAIndividual(children[1]);
+
+    c1->showGenotype();
+    c2->showGenotype();
+
+    c1->mutation(30);
+    c2->mutation(70);
+
+    c1->showGenotype();
+    c2->showGenotype();
+  
+   
+
+ 
 }

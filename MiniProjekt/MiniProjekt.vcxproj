@@ -139,11 +139,15 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="CGAIndividual.cpp" />
+    <ClCompile Include="CGAOptimizer.cpp" />
     <ClCompile Include="Clause.cpp" />
     <ClCompile Include="CMax3SatProblem.cpp" />
     <ClCompile Include="MiniProjekt.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="CGAIndividual.h" />
+    <ClInclude Include="CGAOptimizer.h" />
     <ClInclude Include="Clause.h" />
     <ClInclude Include="CMax3SatProblem.h" />
   </ItemGroup>

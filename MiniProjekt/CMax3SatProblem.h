@@ -6,7 +6,7 @@
 class CMax3SatProblem
 {
 public:
-	std::vector<Clause*> load(int n, std::string file);
+	std::vector<Clause*> load(int amountOfClauzules, std::string file);
 	int compute(std::string solution, int amountOfClauzules, std::vector<Clause*>& clauzles);
 };
 
