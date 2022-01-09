@@ -2,11 +2,15 @@
 #include <vector>
 #include "CMax3SatProblem.h"
 #include "CGAIndividual.h"
+#include "CGAOptimizer.h"
 
 int main()
 {
+    // testy sprawdzające poprawność
+    
     CMax3SatProblem problem = CMax3SatProblem();
 
+    /*
     std::vector<Clause*> clauzules = problem.load(213, "m3s_50_14.txt");
     
     int a = problem.compute(
@@ -50,6 +54,19 @@ int main()
     c2->showGenotype();
   
    
+   */
 
+    // pierwszy optymalizator
+    CGAOptimizer * op1 = new CGAOptimizer(10, 40, 50, problem);
  
+    std::cout << "Populacja przed: " << std::endl;
+    op1->initialize();
+    op1->showPopulation();
+
+    std::cout << std::endl;
+    op1->runIteration();
+    std::cout << "Populacja po: " << std::endl;
+
+    op1->showPopulation();
+
 }

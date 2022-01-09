@@ -11,6 +11,8 @@ private:
 	const int AMOUNTOFCLAUSES = 213;
 
 public:
+	CGAIndividual();
+
 	CGAIndividual(bool value);
 
 	CGAIndividual(bool* newGen);

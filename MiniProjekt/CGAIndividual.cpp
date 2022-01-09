@@ -3,12 +3,14 @@
 #include <random>
 #include <sstream>
 
+
 CGAIndividual::CGAIndividual(bool value) {
 	genotype = new bool[PROBLEMSIZE];
 
 	for (int i = 0; i < PROBLEMSIZE; i++)
 		genotype[i] = value;
 }
+
 
 CGAIndividual::CGAIndividual(bool* newGen) {
 	genotype = newGen;
