@@ -95,3 +95,25 @@ std::vector<CGAIndividual*> CGAOptimizer::runIteration() {
 
 	return newPopulation;
 }
+
+void CGAOptimizer::showBestInPopulation() {
+
+	int m = population[0]->getFitness(problem);
+	int actual = m;
+	bool* best = population[0]->getGenotype();
+
+	for (int i = 1; i < populationQuantity; i++) {
+		actual = population[i]->getFitness(problem);
+		if (actual > m) {
+			best = population[i]->getGenotype();
+			m = actual;
+		}
+	}
+
+	std::cout << "Najlepsze rozwiazanie w populacji to: " << actual << " dla osobnika: ";
+	for (int i = 0; i < PROBLEMSIZE; i++)
+		std::cout << best[i] ? 1 : 0;
+
+	std::cout << std::endl;
+	best = NULL;
+}

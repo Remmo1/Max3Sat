@@ -1,8 +1,9 @@
 ﻿#include <iostream>
 #include <vector>
 #include "CMax3SatProblem.h"
-#include "CGAIndividual.h"
 #include "CGAOptimizer.h"
+#include "CGAIndividual.h"
+
 
 int main()
 {
@@ -62,18 +63,21 @@ int main()
     std::cout << "Populacja przed: " << std::endl;
     op1->initialize();
     op1->showPopulation();
-
+    op1->showBestInPopulation();
+   
     std::cout << std::endl;
     
     op1->runIteration();
     std::cout << "Populacja po 1 iteracji: " << std::endl;
     op1->showPopulation();
+    op1->showBestInPopulation();
 
     std::cout << std::endl;
 
     op1->runIteration();
     std::cout << "Populacja po 2 iteracji: " << std::endl;
     op1->showPopulation();
+    op1->showBestInPopulation();
 
     delete op1;
 

@@ -29,6 +29,7 @@ public:
 	std::vector<CGAIndividual*> runIteration();
 
 	void showPopulation();
+	void showBestInPopulation();
 
 };
 
