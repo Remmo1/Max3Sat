@@ -8,6 +8,11 @@ CGAOptimizer::CGAOptimizer(int populationQuantity, int probabilityCrossing, int 
 	this->problem = problem;
 }
 
+CGAOptimizer::~CGAOptimizer() {
+	for (int i = 0; i < population.size(); i++)
+		delete population[i];
+}
+
 bool CGAOptimizer::initialize() {
 	srand(time(NULL));
 
@@ -35,10 +40,10 @@ std::vector<CGAIndividual*> CGAOptimizer::runIteration() {
 
 	std::vector<CGAIndividual*> newPopulation;
 
-	CGAIndividual* father;
-	CGAIndividual* mother;
-	CGAIndividual* child1;
-	CGAIndividual* child2;
+	CGAIndividual* father = NULL;
+	CGAIndividual* mother = NULL;
+	CGAIndividual* child1 = NULL;
+	CGAIndividual* child2 = NULL;
 
 	while (newPopulation.size() < population.size()) {
 		// wybór ojca
@@ -73,12 +78,20 @@ std::vector<CGAIndividual*> CGAOptimizer::runIteration() {
 		
 		// wrzucenie kopii jeœli wartoœæ mniejsza
 		else {
-			newPopulation.push_back(father);
-			newPopulation.push_back(mother);
+			child1 = new CGAIndividual(*father);
+			child2 = new CGAIndividual(*mother);
+
+			newPopulation.push_back(child1);
+			newPopulation.push_back(child2);
 		}
 		
 	}
+	
+	// usuniêcie starej populacji
+	for (int i = 0; i < populationQuantity; i++)
+		delete population[i];
 
 	population = newPopulation;
+
 	return newPopulation;
 }

@@ -23,6 +23,8 @@ private:
 
 public:
 	CGAOptimizer(int populationQuantity, int probabilityCrossing, int probabilityMutation, CMax3SatProblem problem);
+	~CGAOptimizer();
+
 	bool initialize();
 	std::vector<CGAIndividual*> runIteration();
 

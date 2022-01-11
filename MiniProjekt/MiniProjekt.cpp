@@ -64,9 +64,17 @@ int main()
     op1->showPopulation();
 
     std::cout << std::endl;
+    
     op1->runIteration();
-    std::cout << "Populacja po: " << std::endl;
-
+    std::cout << "Populacja po 1 iteracji: " << std::endl;
     op1->showPopulation();
+
+    std::cout << std::endl;
+
+    op1->runIteration();
+    std::cout << "Populacja po 2 iteracji: " << std::endl;
+    op1->showPopulation();
+
+    delete op1;
 
 }

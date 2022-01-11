@@ -4,6 +4,10 @@
 #include <sstream>
 
 
+CGAIndividual::CGAIndividual() {
+	genotype = NULL;
+}
+
 CGAIndividual::CGAIndividual(bool value) {
 	genotype = new bool[PROBLEMSIZE];
 
@@ -13,7 +17,25 @@ CGAIndividual::CGAIndividual(bool value) {
 
 
 CGAIndividual::CGAIndividual(bool* newGen) {
+	if (genotype != NULL)
+		delete[] genotype;
 	genotype = newGen;
+}
+
+CGAIndividual::CGAIndividual(const CGAIndividual& other) {
+	if (genotype != NULL)
+		delete[] genotype;
+
+	bool* newGenotype = new bool[PROBLEMSIZE];
+
+	for (int i = 0; i < PROBLEMSIZE; i++)
+		newGenotype[i] = other.genotype[i];
+
+	genotype = newGenotype;
+}
+
+CGAIndividual::~CGAIndividual() {
+	delete[] genotype;
 }
 
 bool** CGAIndividual::crossover(CGAIndividual& other) {
