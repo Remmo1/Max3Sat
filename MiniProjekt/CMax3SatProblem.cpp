@@ -63,7 +63,7 @@ int CMax3SatProblem::compute(bool* solution, int amountOfClauzules, std::vector<
 			continue;
 		}
 		else {
-			if (nr < 0 && solution[std::abs(nr)]) {
+			if (nr < 0 && !solution[std::abs(nr)]) {
 				counter++;
 				continue;
 			}
@@ -76,7 +76,7 @@ int CMax3SatProblem::compute(bool* solution, int amountOfClauzules, std::vector<
 			continue;
 		}
 		else {
-			if (nr2 < 0 && solution[std::abs(nr2)]) {
+			if (nr2 < 0 && !solution[std::abs(nr2)]) {
 				counter++;
 				continue;
 			}
@@ -87,7 +87,7 @@ int CMax3SatProblem::compute(bool* solution, int amountOfClauzules, std::vector<
 		if (nr3 >= 0 && solution[nr3])
 			counter++;
 		else {
-			if (nr3 < 0 && solution[std::abs(nr3)])
+			if (nr3 < 0 && !solution[std::abs(nr3)])
 				counter++;
 		}
 	}
