@@ -9,13 +9,19 @@ CGAOptimizer::CGAOptimizer(int populationQuantity, int probabilityCrossing, int 
 }
 
 CGAOptimizer::~CGAOptimizer() {
-	for (int i = 0; i < population.size(); i++)
+	for (int i = 0; i < population.size(); i++) {
 		delete population[i];
+		delete clauses[i];
+	}
 }
 
-bool CGAOptimizer::initialize() {
+bool CGAOptimizer::initialize(std::string fileName) {
 	srand(time(NULL));
 
+	// otworzenie pliku
+	clauses = problem.load(AMOUNTOFCLAUSES, fileName);
+
+	// tworzenie losowej populacji
 	for (int i = 0; i < populationQuantity; i++) {
 		bool* gens = new bool[PROBLEMSIZE];
 
@@ -27,7 +33,8 @@ bool CGAOptimizer::initialize() {
 		population.push_back(new CGAIndividual(gens));
 	}
 
-	return population.empty() ? false : true;
+	// sprawdzenie czy otworzenie pliku siê uda³o
+	return clauses.empty() ? false : true;
 }
 
 void CGAOptimizer::showPopulation() {
@@ -50,13 +57,13 @@ std::vector<CGAIndividual*> CGAOptimizer::runIteration() {
 		CGAIndividual* fatherCandidate1 = population.at(std::rand() % populationQuantity);
 		CGAIndividual* fatherCandidate2 = population.at(std::rand() % populationQuantity);
 
-		father = fatherCandidate1->getFitness(problem) > fatherCandidate2->getFitness(problem) ? fatherCandidate1 : fatherCandidate2;
+		father = fatherCandidate1->getFitness(clauses, problem) > fatherCandidate2->getFitness(clauses, problem) ? fatherCandidate1 : fatherCandidate2;
 
 		// wybór matki
 		CGAIndividual* motherCandidate1 = population.at(std::rand() % populationQuantity);
 		CGAIndividual* motherCandidate2 = population.at(std::rand() % populationQuantity);
 
-		mother = motherCandidate1->getFitness(problem) > motherCandidate2->getFitness(problem) ? motherCandidate1 : motherCandidate2;
+		mother = motherCandidate1->getFitness(clauses, problem) > motherCandidate2->getFitness(clauses, problem) ? motherCandidate1 : motherCandidate2;
 
 		// sprawdzenie czy krzy¿ujemy
 		int probability = (std::rand() % 100) + 1;
@@ -98,12 +105,12 @@ std::vector<CGAIndividual*> CGAOptimizer::runIteration() {
 
 void CGAOptimizer::showBestInPopulation() {
 
-	int m = population[0]->getFitness(problem);
+	int m = population[0]->getFitness(clauses, problem);
 	int actual = m;
 	bool* best = population[0]->getGenotype();
 
 	for (int i = 1; i < populationQuantity; i++) {
-		actual = population[i]->getFitness(problem);
+		actual = population[i]->getFitness(clauses, problem);
 		if (actual > m) {
 			best = population[i]->getGenotype();
 			m = actual;

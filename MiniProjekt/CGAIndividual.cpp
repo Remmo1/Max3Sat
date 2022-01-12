@@ -42,11 +42,10 @@ bool** CGAIndividual::crossover(CGAIndividual& other) {
 	srand(time(NULL));
 
 	int randomIndex;
-	bool** result = new bool* [2];
+	bool** result = new bool * [2];
 
-	for (int i = 0; i < 2; i++) {
+	for (int i = 0; i < 2; i++) 
 		result[i] = new bool[PROBLEMSIZE];
-	}
 
 	for (int i = 0; i < PROBLEMSIZE; i++) {
 		randomIndex = std::rand() % 2;
@@ -79,19 +78,8 @@ bool* CGAIndividual::getGenotype() {
 	return genotype;
 }
 
-int CGAIndividual::getFitness(CMax3SatProblem problem) {
-	std::vector<Clause*> clauses = problem.load(213, "m3s_50_14.txt");
-
-	std::stringstream solution;
-
-	for (int i = 0; i < PROBLEMSIZE; i++) {
-		if (genotype[i])
-			solution << '1';
-		else
-			solution << '0';
-	}
-
-	return problem.compute(solution.str(), AMOUNTOFCLAUSES, clauses);
+int CGAIndividual::getFitness(std::vector<Clause*> clauses, CMax3SatProblem problem) {
+	return problem.compute(this->genotype, AMOUNTOFCLAUSES, clauses);
 }
 
 void CGAIndividual::showGenotype() {

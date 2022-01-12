@@ -17,6 +17,7 @@ private:
 	const int AMOUNTOFCLAUSES = 213;
 
 	std::vector<CGAIndividual*> population;
+	std::vector<Clause*> clauses;
 
 	CMax3SatProblem problem;
 
@@ -25,7 +26,7 @@ public:
 	CGAOptimizer(int populationQuantity, int probabilityCrossing, int probabilityMutation, CMax3SatProblem problem);
 	~CGAOptimizer();
 
-	bool initialize();
+	bool initialize(std::string fileName);
 	std::vector<CGAIndividual*> runIteration();
 
 	void showPopulation();

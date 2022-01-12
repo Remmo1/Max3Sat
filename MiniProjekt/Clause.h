@@ -2,7 +2,6 @@
 class Clause
 {
 private:
-
 	// numer 
 	int st; // first
 	int nd; // second
@@ -23,5 +22,4 @@ public:
 	void setSt(int st);
 	void setNd(int nd);
 	void setRd(int rd);
-
 };

@@ -52,18 +52,18 @@ std::vector<Clause*> CMax3SatProblem::load(int amountOfClauzules, std::string fi
 }
 
 
-int CMax3SatProblem::compute(std::string solution, int amountOfClauzules, std::vector<Clause*>& clauzles) {
+int CMax3SatProblem::compute(bool* solution, int amountOfClauzules, std::vector<Clause*>& clauzles) {
 	int counter = 0;
 	for (int i = 0; i < amountOfClauzules; i++) {
 
 		int nr = clauzles.at(i)->getSt();
 
-		if (nr >= 0 && solution[nr] == '1') {
+		if (nr >= 0 && solution[nr]) {
 			counter++;
 			continue;
 		}
 		else {
-			if (nr < 0 && solution[std::abs(nr)] == '0') {
+			if (nr < 0 && solution[std::abs(nr)]) {
 				counter++;
 				continue;
 			}
@@ -71,12 +71,12 @@ int CMax3SatProblem::compute(std::string solution, int amountOfClauzules, std::v
 
 		int nr2 = clauzles.at(i)->getNd();
 
-		if (nr2 >= 0 && solution[nr2] == '1') {
+		if (nr2 >= 0 && solution[nr2]) {
 			counter++;
 			continue;
 		}
 		else {
-			if (nr2 < 0 && solution[std::abs(nr2)] == '0') {
+			if (nr2 < 0 && solution[std::abs(nr2)]) {
 				counter++;
 				continue;
 			}
@@ -84,10 +84,10 @@ int CMax3SatProblem::compute(std::string solution, int amountOfClauzules, std::v
 
 		int nr3 = clauzles.at(i)->getRd();
 
-		if (nr3 >= 0 && solution[nr3] == '1')
+		if (nr3 >= 0 && solution[nr3])
 			counter++;
 		else {
-			if (nr3 < 0 && solution[std::abs(nr3)] == '0')
+			if (nr3 < 0 && solution[std::abs(nr3)])
 				counter++;
 		}
 	}

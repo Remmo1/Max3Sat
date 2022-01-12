@@ -14,7 +14,7 @@ Clause::Clause(int st, int nd, int rd) {
 }
 
 Clause::~Clause() {
-	
+
 }
 
 void Clause::show() {

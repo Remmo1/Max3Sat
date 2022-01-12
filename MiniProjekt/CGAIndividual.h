@@ -20,7 +20,8 @@ public:
 
 	bool** crossover(CGAIndividual& other);
 	void mutation(int probability);
-	int getFitness(CMax3SatProblem problem);
+	int getFitness(std::vector<Clause*> clauses, CMax3SatProblem problem);
+
 	bool* getGenotype();
 
 	void showGenotype();
