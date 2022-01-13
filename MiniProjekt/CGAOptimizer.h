@@ -27,10 +27,9 @@ public:
 	~CGAOptimizer();
 
 	bool initialize(std::string fileName);
-	std::vector<CGAIndividual*> runIteration();
+	void runIteration();
 
 	void showPopulation();
 	void showBestInPopulation();
-
 };
 

@@ -27,10 +27,11 @@ std::vector<Clause*> CMax3SatProblem::load(int amountOfClauzules, std::string fi
 	// odczytujemy dane
 	int i = 0;
 	while (i < amountOfClauzules) {
-		// splitujemy
+		// pobieramy dane
 		std::getline(file, line);
+
+		// splitujemy po spacji
 		std::stringstream streamData(line);
-		
 		while (std::getline(streamData, val, separator)) {
 			outputArray.push_back(val);
 		}
@@ -47,7 +48,10 @@ std::vector<Clause*> CMax3SatProblem::load(int amountOfClauzules, std::string fi
 		i++;
 	}
 
+	// zamykamy plik i sprz¹tamy
+	outputArray.clear();
 	file.close();
+
 	return clauses;
 }
 

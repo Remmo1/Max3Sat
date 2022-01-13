@@ -27,11 +27,13 @@ int main()
         op1->showBestInPopulation();
 
         std::cout << std::endl;
+        
 
         op1->runIteration();
         std::cout << "Populacja po 2 iteracji: " << std::endl;
         op1->showPopulation();
         op1->showBestInPopulation();
+        
        
     }
     else {

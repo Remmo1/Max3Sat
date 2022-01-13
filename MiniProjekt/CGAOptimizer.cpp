@@ -9,10 +9,17 @@ CGAOptimizer::CGAOptimizer(int populationQuantity, int probabilityCrossing, int 
 }
 
 CGAOptimizer::~CGAOptimizer() {
-	for (int i = 0; i < population.size(); i++) {
+	for (int i = 0; i < population.size(); i++) 
 		delete population[i];
-		delete clauses[i];
+	
+	if (!clauses.empty()) {
+		for (int i = 0; i < AMOUNTOFCLAUSES; i++)
+			delete clauses[i];
 	}
+
+
+	population.clear();
+	clauses.clear();
 }
 
 bool CGAOptimizer::initialize(std::string fileName) {
@@ -42,7 +49,7 @@ void CGAOptimizer::showPopulation() {
 		population.at(i)->showGenotype();
 }
 
-std::vector<CGAIndividual*> CGAOptimizer::runIteration() {
+void CGAOptimizer::runIteration() {
 	srand(time(NULL));
 
 	std::vector<CGAIndividual*> newPopulation;
@@ -74,6 +81,12 @@ std::vector<CGAIndividual*> CGAOptimizer::runIteration() {
 			child1 = new CGAIndividual(children[0]);
 			child2 = new CGAIndividual(children[1]);
 
+			// ustawienie podwójnego wskaŸnika na NULL po pobraniu tablic
+			children[0] = NULL;
+			children[1] = NULL;
+			delete[] children;
+			children = NULL;
+
 			// mutacje
 			child1->mutation(probabilityMutation);
 			child2->mutation(probabilityMutation);
@@ -99,8 +112,6 @@ std::vector<CGAIndividual*> CGAOptimizer::runIteration() {
 		delete population[i];
 
 	population = newPopulation;
-
-	return newPopulation;
 }
 
 void CGAOptimizer::showBestInPopulation() {
