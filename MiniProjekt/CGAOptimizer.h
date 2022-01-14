@@ -15,6 +15,7 @@ private:
 
 	const int PROBLEMSIZE = 50;
 	const int AMOUNTOFCLAUSES = 213;
+	const int TOURNAMENTSIZE = 2;
 
 	std::vector<CGAIndividual*> population;
 	std::vector<Clause*> clauses;
@@ -27,6 +28,7 @@ public:
 	~CGAOptimizer();
 
 	bool initialize(std::string fileName);
+	CGAIndividual* tournament(std::vector<CGAIndividual*> somePopulation);
 	void runIteration();
 
 	void showPopulation();

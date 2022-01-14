@@ -1,2 +1,5 @@
-﻿  MiniProjekt.cpp
+﻿  CGAOptimizer.cpp
+C:\Users\remig\OneDrive - Politechnika Wroclawska\Semestr3\Techniki\MaxThreeSat\MiniProjekt\MiniProjekt\MiniProjekt\CGAOptimizer.cpp(12,20): warning C4018: "<": niezgodność typu ze znakiem/bez znaku
+C:\Users\remig\OneDrive - Politechnika Wroclawska\Semestr3\Techniki\MaxThreeSat\MiniProjekt\MiniProjekt\MiniProjekt\CGAOptimizer.cpp(25,12): warning C4244: "argument": konwersja z "time_t" do "unsigned int", możliwa utrata danych
+C:\Users\remig\OneDrive - Politechnika Wroclawska\Semestr3\Techniki\MaxThreeSat\MiniProjekt\MiniProjekt\MiniProjekt\CGAOptimizer.cpp(97,12): warning C4244: "argument": konwersja z "time_t" do "unsigned int", możliwa utrata danych
   MiniProjekt.vcxproj -> C:\Users\remig\OneDrive - Politechnika Wroclawska\Semestr3\Techniki\MaxThreeSat\MiniProjekt\MiniProjekt\Debug\MiniProjekt.exe

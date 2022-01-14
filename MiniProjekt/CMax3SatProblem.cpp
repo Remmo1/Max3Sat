@@ -32,10 +32,9 @@ std::vector<Clause*> CMax3SatProblem::load(int amountOfClauzules, std::string fi
 
 		// splitujemy po spacji
 		std::stringstream streamData(line);
-		while (std::getline(streamData, val, separator)) {
+		while (std::getline(streamData, val, separator)) 
 			outputArray.push_back(val);
-		}
-
+		
 		// nowa klauzla wrzucana do wektora
 		Clause * read = new Clause(
 			stoi(outputArray[1]),

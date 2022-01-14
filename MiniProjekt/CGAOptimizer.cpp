@@ -17,7 +17,6 @@ CGAOptimizer::~CGAOptimizer() {
 			delete clauses[i];
 	}
 
-
 	population.clear();
 	clauses.clear();
 }
@@ -49,28 +48,72 @@ void CGAOptimizer::showPopulation() {
 		population.at(i)->showGenotype();
 }
 
+CGAIndividual* CGAOptimizer::tournament(std::vector<CGAIndividual*> somePopulation) {
+	// losowanie osobników do turnieju
+	bool* isInTournament = new bool[populationQuantity];
+	for (int j = 0; j < populationQuantity; j++)
+		isInTournament[j] = false;
+
+	std::vector<CGAIndividual*> areInTournament;
+	int i = 0;
+	CGAIndividual* actual = nullptr;
+
+	while (i < TOURNAMENTSIZE) {
+		// losujemy osobnika
+		int index = std::rand() % populationQuantity;
+
+		// sprawdzamy czy ju¿ jest w turnieju, jeœli nie ma dopisujemy go do listy uczestników
+		if (!isInTournament[index]) {
+			actual = somePopulation.at(index);
+			isInTournament[index] = true;
+			areInTournament.push_back(actual);
+			i++;
+		}
+	}
+
+	// szukamy zwyciêzcy
+	CGAIndividual* winner = areInTournament[0];
+	int actualResult = winner->getFitness(clauses, problem);
+
+	for (int j = 1; j < TOURNAMENTSIZE; j++) {
+		int act = areInTournament.at(j)->getFitness(clauses, problem);
+
+		if (act > actualResult) {
+			actualResult = act;
+			winner = areInTournament.at(j);
+		}
+	}
+
+	// sprz¹tamy
+	delete[] isInTournament;
+	areInTournament.clear();
+	actual = NULL;
+
+	// zwracamy zwyciêzcê
+	return winner;
+}
+
 void CGAOptimizer::runIteration() {
 	srand(time(NULL));
 
 	std::vector<CGAIndividual*> newPopulation;
 
-	CGAIndividual* father = NULL;
-	CGAIndividual* mother = NULL;
-	CGAIndividual* child1 = NULL;
-	CGAIndividual* child2 = NULL;
+	CGAIndividual* father = nullptr;
+	CGAIndividual* mother = nullptr;
+	CGAIndividual* child1 = nullptr;
+	CGAIndividual* child2 = nullptr;
 
 	while (newPopulation.size() < population.size()) {
-		// wybór ojca
-		CGAIndividual* fatherCandidate1 = population.at(std::rand() % populationQuantity);
-		CGAIndividual* fatherCandidate2 = population.at(std::rand() % populationQuantity);
 
-		father = fatherCandidate1->getFitness(clauses, problem) > fatherCandidate2->getFitness(clauses, problem) ? fatherCandidate1 : fatherCandidate2;
+		// wybór ojca 
+		father = tournament(population);
 
 		// wybór matki
-		CGAIndividual* motherCandidate1 = population.at(std::rand() % populationQuantity);
-		CGAIndividual* motherCandidate2 = population.at(std::rand() % populationQuantity);
+		mother = tournament(population);
 
-		mother = motherCandidate1->getFitness(clauses, problem) > motherCandidate2->getFitness(clauses, problem) ? motherCandidate1 : motherCandidate2;
+		// zabezpieczenie przed wybraniem tego samego osobnika
+		while (mother == father) 
+			mother = tournament(population);
 
 		// sprawdzenie czy krzy¿ujemy
 		int probability = (std::rand() % 100) + 1;

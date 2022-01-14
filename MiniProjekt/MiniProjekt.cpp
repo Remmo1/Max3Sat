@@ -34,7 +34,6 @@ int main()
         op1->showPopulation();
         op1->showBestInPopulation();
         
-       
     }
     else {
         std::cout << "Nie udalo sie otworzyc pliku z danymi, sprawdz czy nazwa jest poprawna! Program zostanie zakonczony" << std::endl;
