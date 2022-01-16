@@ -7,7 +7,7 @@
 #include <sstream>
 
 
-std::vector<Clause*> CMax3SatProblem::load(int amountOfClauzules, std::string filename) {
+std::vector<Clause*> CMax3SatProblem::load(int amountOfClauses, std::string filename) {
 
 	// otwieranie pliku
 	std::ifstream file;
@@ -26,7 +26,7 @@ std::vector<Clause*> CMax3SatProblem::load(int amountOfClauzules, std::string fi
 
 	// odczytujemy dane
 	int i = 0;
-	while (i < amountOfClauzules) {
+	while (i < amountOfClauses) {
 		// pobieramy dane
 		std::getline(file, line);
 
@@ -55,9 +55,9 @@ std::vector<Clause*> CMax3SatProblem::load(int amountOfClauzules, std::string fi
 }
 
 
-int CMax3SatProblem::compute(bool* solution, int amountOfClauzules, std::vector<Clause*>& clauzles) {
+int CMax3SatProblem::compute(bool* solution, int amountOfClauses, std::vector<Clause*>& clauzles) {
 	int counter = 0;
-	for (int i = 0; i < amountOfClauzules; i++) {
+	for (int i = 0; i < amountOfClauses; i++) {
 
 		int nr = clauzles.at(i)->getSt();
 

@@ -1,11 +1,16 @@
 #include "CGAOptimizer.h"
 
 
-CGAOptimizer::CGAOptimizer(int populationQuantity, int probabilityCrossing, int probabilityMutation, CMax3SatProblem problem) {
-	this->populationQuantity = populationQuantity;
-	this->probabilityCrossing = probabilityCrossing;
-	this->probabilityMutation = probabilityMutation;
-	this->problem = problem;
+CGAOptimizer::CGAOptimizer(
+	int _populationQuantity, 
+	int _probabilityCrossing, 
+	int _probabilityMutation, 
+	CMax3SatProblem _problem
+) {
+	populationQuantity = _populationQuantity;
+	probabilityCrossing = _probabilityCrossing;
+	probabilityMutation = _probabilityMutation;
+	problem = _problem;
 }
 
 CGAOptimizer::~CGAOptimizer() {

@@ -2,15 +2,15 @@
 #include <iostream>
 
 Clause::Clause() {
-	this->st = 0;
-	this->nd = 0;
-	this->rd = 0;
+	st = 0;
+	nd = 0;
+	rd = 0;
 }
 
-Clause::Clause(int st, int nd, int rd) {
-	this->st = st;
-	this->nd = nd;
-	this->rd = rd;
+Clause::Clause(int _st, int _nd, int _rd) {
+	st = _st;
+	nd = _nd;
+	rd = _rd;
 }
 
 Clause::~Clause() {
@@ -18,7 +18,7 @@ Clause::~Clause() {
 }
 
 void Clause::show() {
-	std::cout << this->st << ", " << this->nd << ", " << this->rd << std::endl;
+	std::cout << st << ", " << nd << ", " << rd << std::endl;
 }
 
 int Clause::getSt() {
@@ -33,14 +33,14 @@ int Clause::getRd() {
 	return rd;
 }
 
-void Clause::setSt(int st) {
-	this->st = st;
+void Clause::setSt(int _st) {
+	st = _st;
 }
 
-void Clause::setNd(int nd) {
-	this->nd = nd;
+void Clause::setNd(int _nd) {
+	nd = _nd;
 }
 
-void Clause::setRd(int rd) {
-	this->rd = rd;
+void Clause::setRd(int _rd) {
+	rd = _rd;
 }

@@ -22,9 +22,8 @@ private:
 
 	CMax3SatProblem problem;
 
-
 public:
-	CGAOptimizer(int populationQuantity, int probabilityCrossing, int probabilityMutation, CMax3SatProblem problem);
+	CGAOptimizer(int _populationQuantity, int _probabilityCrossing, int _probabilityMutation, CMax3SatProblem _problem);
 	~CGAOptimizer();
 
 	bool initialize(std::string fileName);

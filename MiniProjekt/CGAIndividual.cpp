@@ -51,12 +51,12 @@ bool** CGAIndividual::crossover(CGAIndividual& other) {
 		randomIndex = std::rand() % 2;
 
 		if (randomIndex == 0) {
-			result[0][i] = this->genotype[i];
+			result[0][i] = genotype[i];
 			result[1][i] = other.genotype[i];
 		}
 		else {
 			result[0][i] = other.genotype[i];
-			result[1][i] = this->genotype[i];
+			result[1][i] = genotype[i];
 		}
 	}
 
@@ -79,7 +79,7 @@ bool* CGAIndividual::getGenotype() {
 }
 
 int CGAIndividual::getFitness(std::vector<Clause*> clauses, CMax3SatProblem problem) {
-	return problem.compute(this->genotype, AMOUNTOFCLAUSES, clauses);
+	return problem.compute(genotype, AMOUNTOFCLAUSES ,clauses);
 }
 
 void CGAIndividual::showGenotype() {

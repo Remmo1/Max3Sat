@@ -9,7 +9,7 @@ private:
 
 public:
 	Clause();
-	Clause(int st, int nd, int rd);
+	Clause(int _st, int _nd, int _rd);
 
 	~Clause();
 
@@ -19,7 +19,7 @@ public:
 	int getNd();
 	int getRd();
 
-	void setSt(int st);
-	void setNd(int nd);
-	void setRd(int rd);
+	void setSt(int _st);
+	void setNd(int _nd);
+	void setRd(int _rd);
 };
