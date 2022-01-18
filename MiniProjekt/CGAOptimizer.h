@@ -23,14 +23,25 @@ private:
 	CMax3SatProblem problem;
 
 public:
+	// konstruktor i destruktor
 	CGAOptimizer(int _populationQuantity, int _probabilityCrossing, int _probabilityMutation, CMax3SatProblem _problem);
 	~CGAOptimizer();
 
+	// metoda która tworzy losow¹ populacjê i otwiera plik
+	// rzuca false jeœli pliku nie da³o siê otworzyæ
 	bool initialize(std::string fileName);
+
+	// metoda wyboru rodzica spoœród TOURNAMENTSIZE osobników dla populacji somePopulation
 	CGAIndividual* tournament(std::vector<CGAIndividual*> somePopulation);
+
+	// pojedyncza iteracja okreœlona w instrukcji
 	void runIteration();
 
+	// metody dodatkowe:
+	
+	// pokazuje wszystkie osobniki w populacji
 	void showPopulation();
+	// pokazuje najlepszego osobnika 
 	void showBestInPopulation();
 };
 

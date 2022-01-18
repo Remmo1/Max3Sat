@@ -55,11 +55,19 @@ std::vector<Clause*> CMax3SatProblem::load(int amountOfClauses, std::string file
 }
 
 
-int CMax3SatProblem::compute(bool* solution, int amountOfClauses, std::vector<Clause*>& clauzles) {
+int CMax3SatProblem::compute(bool* solution, int amountOfClauses, std::vector<Clause*>& clauses) {
 	int counter = 0;
 	for (int i = 0; i < amountOfClauses; i++) {
 
-		int nr = clauzles.at(i)->getSt();
+		/*
+		* metoda dzia³a tak, weŸmy np. klauzlê (0, -1, 2) oraz rozwi¹zanie 000
+		* dla 0 mamy rozwi¹zanie[0] = 0 zatem false, czyli musimy sprawdzaæ dalej
+		* dla -1 mamy rozwi¹zanie[1] = 0 czyli true, poniewa¿ dla 1 -> flase <=> -1 -> true
+		* nie musimy ju¿ sprawdzaæ ostatniego trzeciego elementu bo klauzula jest spe³niona, wiêc 
+		* przechodzimy dalej u¿ywaj¹c continue
+		*/
+
+		int nr = clauses.at(i)->getSt();
 
 		if (nr >= 0 && solution[nr]) {
 			counter++;
@@ -72,7 +80,7 @@ int CMax3SatProblem::compute(bool* solution, int amountOfClauses, std::vector<Cl
 			}
 		}
 
-		int nr2 = clauzles.at(i)->getNd();
+		int nr2 = clauses.at(i)->getNd();
 
 		if (nr2 >= 0 && solution[nr2]) {
 			counter++;
@@ -85,7 +93,7 @@ int CMax3SatProblem::compute(bool* solution, int amountOfClauses, std::vector<Cl
 			}
 		}
 
-		int nr3 = clauzles.at(i)->getRd();
+		int nr3 = clauses.at(i)->getRd();
 
 		if (nr3 >= 0 && solution[nr3])
 			counter++;

@@ -3,11 +3,12 @@
 #include <random>
 #include <sstream>
 
-
+// konsturktor bezparametrowy
 CGAIndividual::CGAIndividual() {
 	genotype = NULL;
 }
 
+// mo¿na podaæ do konstruktora wartoœæ true/false, wtedy ca³y jego genotyp taki bêdzie
 CGAIndividual::CGAIndividual(bool value) {
 	genotype = new bool[PROBLEMSIZE];
 
@@ -15,13 +16,14 @@ CGAIndividual::CGAIndividual(bool value) {
 		genotype[i] = value;
 }
 
-
+// mo¿na podaæ do konstruktora nowy genotyp jako tablice
 CGAIndividual::CGAIndividual(bool* newGen) {
 	if (genotype != NULL)
 		delete[] genotype;
 	genotype = newGen;
 }
 
+// konstruktor kopiuj¹cy 
 CGAIndividual::CGAIndividual(const CGAIndividual& other) {
 	if (genotype != NULL)
 		delete[] genotype;
@@ -34,10 +36,12 @@ CGAIndividual::CGAIndividual(const CGAIndividual& other) {
 	genotype = newGenotype;
 }
 
+// destruktor
 CGAIndividual::~CGAIndividual() {
 	delete[] genotype;
 }
 
+// ================== metody z instrukcji =======================
 bool** CGAIndividual::crossover(CGAIndividual& other) {
 	srand(time(NULL));
 
@@ -74,12 +78,14 @@ void CGAIndividual::mutation(int probability) {
 	}
 }
 
-bool* CGAIndividual::getGenotype() {
-	return genotype;
+int CGAIndividual::getFitness(std::vector<Clause*> clauses, CMax3SatProblem problem) {
+	return problem.compute(genotype, AMOUNTOFCLAUSES, clauses);
 }
 
-int CGAIndividual::getFitness(std::vector<Clause*> clauses, CMax3SatProblem problem) {
-	return problem.compute(genotype, AMOUNTOFCLAUSES ,clauses);
+// =============== metody dodatkowe ================
+
+bool* CGAIndividual::getGenotype() {
+	return genotype;
 }
 
 void CGAIndividual::showGenotype() {
